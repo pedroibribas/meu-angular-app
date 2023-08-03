@@ -1,0 +1,36 @@
+<header>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container">
+            <a [routerLink]="[homeLink]">
+                <img
+                    class="navbar-brand"
+                    src="../../favicon.ico"
+                    alt="Ícone do Angular."
+                >
+            </a>
+            <div *ngIf="user$ | async as user">
+                <div *ngIf="user.name; else login">
+                    <p>{{ user.name }}</p>
+                    <a (click)="logout()" class="nav-link">Sair</a>
+                </div>
+                <ng-template #login>
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="[loginLink]">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="[registerLink]">Registrar</a>
+                        </li>
+                    </ul>
+                </ng-template>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- 
+    *Pipe async `| async`:* permite obter os dados do observável no template,
+    dispensando a subscrição.
+    
+    *`ng-template`:* elemento que é renderizado somente quando a sua
+     referência `#` é invocada.
+ -->

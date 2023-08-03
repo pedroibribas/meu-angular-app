@@ -1,0 +1,89 @@
+<div class="container">
+    <h2>Novo usuário</h2>
+    <form class="form" [formGroup]="newUserForm" (submit)="register()">
+        <div class="form-group mt-3">
+            <label for="fullName" class="form-label">Nome completo</label>
+            <input 
+                type="text"
+                class="form-control"
+                name="fullName"
+                placeholder="Nome do usuário"
+                formControlName="fullName"
+            >
+            <ul *ngIf="fullName?.touched" class="mt-1">
+                <li *ngIf="fullName?.errors?.['required']" class="small text-danger">
+                    O nome completo é exigido
+                </li>
+                <li *ngIf="fullName?.errors?.['minLength']" class="small text-danger">
+                    O nome completo precisa ter 8 caracteres no mínimo.
+                </li>
+            </ul>
+        </div>
+        <div class="form-group mt-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input 
+                type="email"
+                class="form-control"
+                name="email"
+                placeholder="Nome do usuário"
+                formControlName="email"
+            >
+            <ul *ngIf="email?.touched" class="mt-1">
+                <li *ngIf="email?.errors?.['required']" class="small text-danger">
+                    O email é exigido.
+                </li>
+                <li *ngIf="email?.errors?.['email']" class="small text-danger">
+                    O email não está no formato correto.
+                </li>
+            </ul>
+        </div>
+        <div class="form-group mt-3">
+            <label for="userName" class="form-label">Nome do usuário</label>
+            <input 
+                type="text"
+                class="form-control"
+                name="userName"
+                placeholder="Nome do usuário"
+                formControlName="userName"
+            >
+            <ul *ngIf="userName?.touched" class="mt-1">
+                <li *ngIf="userName?.errors?.['required']" class="small text-danger">
+                    O nome de usuário é exigido.
+                </li>
+                <li *ngIf="userName?.errors?.['lowercase']" class="small text-danger">
+                    O nome de usuário precisa ser minúsculo.
+                </li>
+                <li *ngIf="userName?.errors?.['userExists']" class="small text-danger">
+                    O usuário já existe.
+                </li>
+            </ul>
+        </div>
+        <div class="form-group mt-3">
+            <label for="password" class="form-label">Senha</label>
+            <input
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="Senha do usuário"
+                formControlName="password"
+            >
+            <ul *ngIf="password?.touched" class="mt-1">
+                <li *ngIf="password?.errors?.['required']" class="small text-danger">
+                    A senha é exigida.
+                </li>
+                <li *ngIf="newUserForm.errors?.['userPasswordEqual']" class="small text-danger">
+                    A senha não pode ser igual ao nome de usuário.
+                </li>
+            </ul>
+        </div>
+        <button
+            type="submit"
+            class="btn btn-primary btn-block mt-3"
+            [disabled]="newUserForm.invalid"
+        >
+            Enviar
+        </button>
+    </form>
+    <p>Já é usuário? <a [routerLink]="['../login']">Faça seu login</a></p>
+    <a [routerLink]="['']">Ir para a Home.</a>
+</div>
